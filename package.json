@@ -12,7 +12,11 @@
     "clean": "rimraf dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "lint:check": "eslint src/**/*.ts --max-warnings 0",
+    "check": "npm run lint:check && npm run test"
   },
   "keywords": [
     "typescript",
@@ -24,6 +28,9 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.1",
+    "@typescript-eslint/parser": "^8.50.1",
+    "eslint": "^9.39.2",
     "jest": "^30.2.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.4.6",

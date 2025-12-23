@@ -1,0 +1,2 @@
+# This file is deprecated in ESLint v9+
+# Ignore patterns are now configured in eslint.config.js
