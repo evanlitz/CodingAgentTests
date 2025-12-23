@@ -14,7 +14,7 @@ A simple Node.js TypeScript project to test the autonomous agent
 - [x] Add unit tests with Jest for the greet and add functions
 
 ### Phase 2: Additional Features
-- [ ] Add a multiply function to src/index.ts with proper TypeScript types
+- [x] Add a multiply function to src/index.ts with proper TypeScript types
 - [ ] Create unit tests for the multiply function
 - [ ] Add ESLint configuration for code quality
 - [ ] Create a CONTRIBUTING.md file with contribution guidelines
