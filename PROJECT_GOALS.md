@@ -15,7 +15,7 @@ A simple Node.js TypeScript project to test the autonomous agent
 
 ### Phase 2: Additional Features
 - [x] Add a multiply function to src/index.ts with proper TypeScript types
-- [ ] Create unit tests for the multiply function
+- [x] Create unit tests for the multiply function
 - [ ] Add ESLint configuration for code quality
 - [ ] Create a CONTRIBUTING.md file with contribution guidelines
 - [ ] Add GitHub Actions workflow for CI/CD
@@ -31,5 +31,18 @@ A simple Node.js TypeScript project to test the autonomous agent
 - Created jest.config.js with ts-jest preset
 - Created comprehensive test suite in src/index.test.ts
 - Added test scripts to package.json (test, test:watch, test:coverage)
-- All 12 tests passing successfully
+- All 22 tests passing successfully (5 for greet, 7 for add, 10 for multiply)
 - Updated README with testing documentation
+
+## Multiply Function Test Coverage
+The multiply function has comprehensive unit tests covering:
+- Basic multiplication of positive numbers
+- Multiplication of negative numbers (both operands negative)
+- Mixed sign multiplication (positive × negative)
+- Edge cases: multiplication by zero, zero by zero
+- Identity property: multiplication by one
+- Decimal number multiplication with precision checking
+- Large number multiplication
+- Negative one as multiplier
+
+All multiply function tests are passing with 100% function coverage.

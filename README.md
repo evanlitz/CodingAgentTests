@@ -99,6 +99,7 @@ When you run the project, you should see:
 ```
 Hello, World! Welcome to the test project.
 5 + 3 = 8
+5 * 3 = 15
 Test project is running successfully!
 ```
 
@@ -107,13 +108,16 @@ Test project is running successfully!
 You can import and use the exported functions in your own TypeScript/JavaScript files:
 
 ```typescript
-import { greet, add } from './index';
+import { greet, add, multiply } from './index';
 
 const message = greet('Alice');
 console.log(message); // Output: Hello, Alice! Welcome to the test project.
 
-const result = add(10, 20);
-console.log(result); // Output: 30
+const sum = add(10, 20);
+console.log(sum); // Output: 30
+
+const product = multiply(6, 7);
+console.log(product); // Output: 42
 ```
 
 ## 🧪 Testing
@@ -151,17 +155,18 @@ Coverage reports will show:
 ### Test Structure
 
 Tests are located alongside the source files with the `.test.ts` extension:
-- `src/index.test.ts` - Tests for greet() and add() functions
+- `src/index.test.ts` - Tests for greet(), add(), and multiply() functions
 
 The test suite includes:
-- **greet() function tests**:
+
+- **greet() function tests (5 tests)**:
   - Basic greeting functionality
   - Single character names
   - Names with spaces
   - Empty strings
   - Special characters (e.g., María José)
 
-- **add() function tests**:
+- **add() function tests (7 tests)**:
   - Addition of positive numbers
   - Addition of negative numbers
   - Mixed positive and negative numbers
@@ -169,23 +174,40 @@ The test suite includes:
   - Decimal number precision
   - Large numbers
 
+- **multiply() function tests (10 tests)**:
+  - Multiplication of positive numbers
+  - Multiplication of negative numbers
+  - Mixed sign multiplication
+  - Multiplication by zero (both cases)
+  - Multiplication by one (identity property)
+  - Decimal number multiplication
+  - Decimal multiplication with precision
+  - Large number multiplication
+  - Multiplication by negative one
+
+**Total: 22 tests, all passing ✅**
+
+For detailed testing documentation, see `TESTING.md`.
+
 ## 📁 Project Structure
 
 ```
 test-project/
 ├── src/                      # Source files
-│   ├── index.ts             # Main application file with greet() and add() functions
+│   ├── index.ts             # Main application file with greet(), add(), and multiply()
 │   └── index.test.ts        # Unit tests for index.ts
 ├── dist/                    # Compiled JavaScript output (generated)
 │   ├── index.js            # Compiled JavaScript
 │   ├── index.d.ts          # Type declarations
 │   └── index.js.map        # Source maps
+├── coverage/               # Test coverage reports (generated)
 ├── node_modules/           # Dependencies (generated)
 ├── package.json            # Project metadata and dependencies
 ├── package-lock.json       # Dependency lock file
 ├── tsconfig.json           # TypeScript configuration
 ├── jest.config.js          # Jest configuration
 ├── PROJECT_GOALS.md        # Project objectives and success criteria
+├── TESTING.md              # Detailed testing documentation
 ├── TSCONFIG_EXPLANATION.md # Detailed TypeScript config documentation
 ├── TSCONFIG_SUMMARY.md     # TypeScript config summary
 └── README.md              # This file
