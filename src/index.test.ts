@@ -1,4 +1,4 @@
-import { greet, add } from './index';
+import { greet, add, multiply } from './index';
 
 describe('greet', () => {
   it('should return a greeting message with the provided name', () => {
@@ -61,5 +61,57 @@ describe('add', () => {
   it('should handle large numbers', () => {
     const result = add(1000000, 2000000);
     expect(result).toBe(3000000);
+  });
+});
+
+describe('multiply', () => {
+  it('should multiply two positive numbers correctly', () => {
+    const result = multiply(5, 3);
+    expect(result).toBe(15);
+  });
+
+  it('should multiply two negative numbers correctly', () => {
+    const result = multiply(-5, -3);
+    expect(result).toBe(15);
+  });
+
+  it('should multiply a positive and negative number correctly', () => {
+    const result = multiply(10, -3);
+    expect(result).toBe(-30);
+  });
+
+  it('should multiply by zero correctly', () => {
+    const result = multiply(5, 0);
+    expect(result).toBe(0);
+  });
+
+  it('should multiply zero by zero correctly', () => {
+    const result = multiply(0, 0);
+    expect(result).toBe(0);
+  });
+
+  it('should multiply by one correctly', () => {
+    const result = multiply(5, 1);
+    expect(result).toBe(5);
+  });
+
+  it('should handle decimal numbers', () => {
+    const result = multiply(2.5, 4);
+    expect(result).toBeCloseTo(10);
+  });
+
+  it('should handle decimal multiplication with precision', () => {
+    const result = multiply(2.5, 3.5);
+    expect(result).toBeCloseTo(8.75);
+  });
+
+  it('should handle large numbers', () => {
+    const result = multiply(1000, 2000);
+    expect(result).toBe(2000000);
+  });
+
+  it('should handle negative one as multiplier', () => {
+    const result = multiply(5, -1);
+    expect(result).toBe(-5);
   });
 });

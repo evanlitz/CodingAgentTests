@@ -18,6 +18,16 @@ export function add(a: number, b: number): number {
 }
 
 /**
+ * A simple function to multiply two numbers
+ * @param a - The first number
+ * @param b - The second number
+ * @returns The product of the two numbers
+ */
+export function multiply(a: number, b: number): number {
+  return a * b;
+}
+
+/**
  * Main function that demonstrates the simple functions
  */
 function main(): void {
@@ -26,6 +36,9 @@ function main(): void {
   
   const sum = add(5, 3);
   console.log(`5 + 3 = ${sum}`);
+  
+  const product = multiply(5, 3);
+  console.log(`5 * 3 = ${product}`);
   
   console.log("Test project is running successfully!");
 }
