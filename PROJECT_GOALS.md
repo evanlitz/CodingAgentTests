@@ -8,7 +8,7 @@ A simple Node.js TypeScript project to test the autonomous agent
 - [x] Create tsconfig.json with strict settings
 - [x] Create src/index.ts with a simple function
 - [x] Create README.md with setup instructions
-- [ ] Add .gitignore for Node.js
+- [x] Add .gitignore for Node.js
 
 ## Success Criteria
 1. TypeScript compiles without errors
