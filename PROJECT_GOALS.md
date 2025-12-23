@@ -16,7 +16,7 @@ A simple Node.js TypeScript project to test the autonomous agent
 ### Phase 2: Additional Features
 - [x] Add a multiply function to src/index.ts with proper TypeScript types
 - [x] Create unit tests for the multiply function
-- [ ] Add ESLint configuration for code quality
+- [x] Add ESLint configuration for code quality
 - [ ] Create a CONTRIBUTING.md file with contribution guidelines
 - [ ] Add GitHub Actions workflow for CI/CD
 
