@@ -28,6 +28,16 @@ export function multiply(a: number, b: number): number {
 }
 
 /**
+ * A simple function to subtract two numbers
+ * @param a - The first number (minuend)
+ * @param b - The second number (subtrahend)
+ * @returns The difference of the two numbers (a - b)
+ */
+export function subtract(a: number, b: number): number {
+  return a - b;
+}
+
+/**
  * Main function that demonstrates the simple functions
  */
 function main(): void {
@@ -39,6 +49,9 @@ function main(): void {
   
   const product = multiply(5, 3);
   console.log(`5 * 3 = ${product}`);
+  
+  const difference = subtract(5, 3);
+  console.log(`5 - 3 = ${difference}`);
   
   console.log("Test project is running successfully!");
 }

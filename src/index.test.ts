@@ -1,4 +1,4 @@
-import { greet, add, multiply } from './index';
+import { greet, add, multiply, subtract } from './index';
 
 describe('greet', () => {
   it('should return a greeting message with the provided name', () => {
@@ -113,5 +113,67 @@ describe('multiply', () => {
   it('should handle negative one as multiplier', () => {
     const result = multiply(5, -1);
     expect(result).toBe(-5);
+  });
+});
+
+describe('subtract', () => {
+  it('should subtract two positive numbers correctly', () => {
+    const result = subtract(5, 3);
+    expect(result).toBe(2);
+  });
+
+  it('should subtract two negative numbers correctly', () => {
+    const result = subtract(-5, -3);
+    expect(result).toBe(-2);
+  });
+
+  it('should subtract a negative number from a positive number correctly', () => {
+    const result = subtract(10, -3);
+    expect(result).toBe(13);
+  });
+
+  it('should subtract a positive number from a negative number correctly', () => {
+    const result = subtract(-10, 3);
+    expect(result).toBe(-13);
+  });
+
+  it('should subtract zero from a number correctly', () => {
+    const result = subtract(5, 0);
+    expect(result).toBe(5);
+  });
+
+  it('should subtract a number from zero correctly', () => {
+    const result = subtract(0, 5);
+    expect(result).toBe(-5);
+  });
+
+  it('should subtract zero from zero correctly', () => {
+    const result = subtract(0, 0);
+    expect(result).toBe(0);
+  });
+
+  it('should handle decimal numbers', () => {
+    const result = subtract(5.5, 2.2);
+    expect(result).toBeCloseTo(3.3);
+  });
+
+  it('should handle decimal subtraction with precision', () => {
+    const result = subtract(10.75, 3.25);
+    expect(result).toBeCloseTo(7.5);
+  });
+
+  it('should handle large numbers', () => {
+    const result = subtract(3000000, 1000000);
+    expect(result).toBe(2000000);
+  });
+
+  it('should handle subtracting a number from itself', () => {
+    const result = subtract(42, 42);
+    expect(result).toBe(0);
+  });
+
+  it('should handle negative result from positive operands', () => {
+    const result = subtract(3, 10);
+    expect(result).toBe(-7);
   });
 });

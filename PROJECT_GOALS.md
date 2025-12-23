@@ -95,5 +95,23 @@ Implemented comprehensive GitHub Actions workflows:
 
 All workflows are production-ready and follow GitHub Actions best practices.
 
-### Phase 3: Cache Testing
-- [ ] Add a subtract function to src/index.ts with TypeScript types
+### Phase 3: Cache Testing ✅
+- [x] Add a subtract function to src/index.ts with TypeScript types
+
+## Subtract Function Implementation ✅
+Successfully added subtract function with:
+- Proper TypeScript type annotations (parameters and return type)
+- Comprehensive JSDoc documentation
+- 12 comprehensive unit tests covering:
+  - Basic subtraction of positive numbers
+  - Subtraction of negative numbers (both operands negative)
+  - Mixed sign subtraction (positive - negative, negative - positive)
+  - Edge cases: subtracting zero, subtracting from zero, zero from zero
+  - Decimal number subtraction with precision checking
+  - Large number subtraction
+  - Subtracting a number from itself
+  - Negative results from positive operands
+- Integration into the main function demonstration
+- All 34 tests passing (5 greet + 7 add + 10 multiply + 12 subtract)
+- TypeScript compilation successful with no errors
+- Follows existing code patterns and best practices
