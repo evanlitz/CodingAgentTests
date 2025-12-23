@@ -4,12 +4,21 @@
 A simple Node.js TypeScript project to test the autonomous agent
 
 ## Objectives
+
+### Phase 1: Initial Setup ✅
 - [x] Create package.json with TypeScript dependencies
 - [x] Create tsconfig.json with strict settings
 - [x] Create src/index.ts with a simple function
 - [x] Create README.md with setup instructions
 - [x] Add .gitignore for Node.js
 - [x] Add unit tests with Jest for the greet and add functions
+
+### Phase 2: Additional Features
+- [ ] Add a multiply function to src/index.ts with proper TypeScript types
+- [ ] Create unit tests for the multiply function
+- [ ] Add ESLint configuration for code quality
+- [ ] Create a CONTRIBUTING.md file with contribution guidelines
+- [ ] Add GitHub Actions workflow for CI/CD
 
 ## Success Criteria
 1. TypeScript compiles without errors ✅
