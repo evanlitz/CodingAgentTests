@@ -6,7 +6,7 @@ A simple Node.js TypeScript project to test the autonomous agent
 ## Objectives
 - [x] Create package.json with TypeScript dependencies
 - [x] Create tsconfig.json with strict settings
-- [ ] Create src/index.ts with a simple function
+- [x] Create src/index.ts with a simple function
 - [ ] Create README.md with setup instructions
 - [ ] Add .gitignore for Node.js
 
