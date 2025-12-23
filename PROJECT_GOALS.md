@@ -9,9 +9,18 @@ A simple Node.js TypeScript project to test the autonomous agent
 - [x] Create src/index.ts with a simple function
 - [x] Create README.md with setup instructions
 - [x] Add .gitignore for Node.js
-- [ ] Add unit tests with Jest for the greet and add functions
+- [x] Add unit tests with Jest for the greet and add functions
 
 ## Success Criteria
-1. TypeScript compiles without errors
-2. README has clear instructions
-3. All files committed to git
+1. TypeScript compiles without errors ✅
+2. README has clear instructions ✅
+3. All files committed to git ✅
+4. Unit tests pass successfully ✅
+
+## Testing Implementation
+- Installed Jest, ts-jest, and @types/jest
+- Created jest.config.js with ts-jest preset
+- Created comprehensive test suite in src/index.test.ts
+- Added test scripts to package.json (test, test:watch, test:coverage)
+- All 12 tests passing successfully
+- Updated README with testing documentation

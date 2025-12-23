@@ -1,6 +1,6 @@
 # Test Project
 
-A simple Node.js TypeScript project built to demonstrate an autonomous agent's capabilities. This project showcases TypeScript configuration, build tools, and basic Node.js development patterns.
+A simple Node.js TypeScript project built to demonstrate an autonomous agent's capabilities. This project showcases TypeScript configuration, build tools, and basic Node.js development patterns with comprehensive unit testing.
 
 ## 📋 Table of Contents
 
@@ -9,6 +9,7 @@ A simple Node.js TypeScript project built to demonstrate an autonomous agent's c
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Project Structure](#project-structure)
 - [Scripts](#scripts)
 - [Development](#development)
@@ -23,6 +24,7 @@ This project serves as a testing ground for autonomous agent development and inc
 - Modern ES2022 target compilation
 - Modular function exports for reusability
 - Comprehensive build and development scripts
+- Unit testing with Jest
 
 ## ✨ Features
 
@@ -31,6 +33,7 @@ This project serves as a testing ground for autonomous agent development and inc
 - **Development Mode**: Quick testing with ts-node
 - **Type Declarations**: Automatic .d.ts file generation for library usage
 - **Source Maps**: Full source map support for debugging
+- **Unit Testing**: Comprehensive test suite using Jest and ts-jest
 
 ## 📦 Prerequisites
 
@@ -64,6 +67,9 @@ npm --version
    - ts-node (for development)
    - @types/node (Node.js type definitions)
    - rimraf (for cleaning build artifacts)
+   - jest (for testing)
+   - ts-jest (TypeScript support for Jest)
+   - @types/jest (Jest type definitions)
 
 ## 💻 Usage
 
@@ -110,12 +116,66 @@ const result = add(10, 20);
 console.log(result); // Output: 30
 ```
 
+## 🧪 Testing
+
+This project includes a comprehensive test suite using Jest.
+
+### Running Tests
+
+```bash
+npm test
+```
+
+### Running Tests in Watch Mode
+
+Automatically re-run tests when files change:
+
+```bash
+npm run test:watch
+```
+
+### Running Tests with Coverage
+
+Generate a code coverage report:
+
+```bash
+npm run test:coverage
+```
+
+Coverage reports will show:
+- Statement coverage
+- Branch coverage
+- Function coverage
+- Line coverage
+
+### Test Structure
+
+Tests are located alongside the source files with the `.test.ts` extension:
+- `src/index.test.ts` - Tests for greet() and add() functions
+
+The test suite includes:
+- **greet() function tests**:
+  - Basic greeting functionality
+  - Single character names
+  - Names with spaces
+  - Empty strings
+  - Special characters (e.g., María José)
+
+- **add() function tests**:
+  - Addition of positive numbers
+  - Addition of negative numbers
+  - Mixed positive and negative numbers
+  - Addition with zero
+  - Decimal number precision
+  - Large numbers
+
 ## 📁 Project Structure
 
 ```
 test-project/
 ├── src/                      # Source files
-│   └── index.ts             # Main application file with greet() and add() functions
+│   ├── index.ts             # Main application file with greet() and add() functions
+│   └── index.test.ts        # Unit tests for index.ts
 ├── dist/                    # Compiled JavaScript output (generated)
 │   ├── index.js            # Compiled JavaScript
 │   ├── index.d.ts          # Type declarations
@@ -124,6 +184,7 @@ test-project/
 ├── package.json            # Project metadata and dependencies
 ├── package-lock.json       # Dependency lock file
 ├── tsconfig.json           # TypeScript configuration
+├── jest.config.js          # Jest configuration
 ├── PROJECT_GOALS.md        # Project objectives and success criteria
 ├── TSCONFIG_EXPLANATION.md # Detailed TypeScript config documentation
 ├── TSCONFIG_SUMMARY.md     # TypeScript config summary
@@ -141,7 +202,9 @@ The following npm scripts are available:
 | `dev` | `npm run dev` | Run TypeScript directly using ts-node (no compilation needed) |
 | `watch` | `npm run watch` | Watch for file changes and recompile automatically |
 | `clean` | `npm run clean` | Remove the `dist/` directory and all compiled files |
-| `test` | `npm test` | Run tests (placeholder - no tests configured yet) |
+| `test` | `npm test` | Run all unit tests with Jest |
+| `test:watch` | `npm run test:watch` | Run tests in watch mode (auto-rerun on changes) |
+| `test:coverage` | `npm run test:coverage` | Run tests with coverage report |
 
 ### Common Workflows
 
@@ -163,13 +226,19 @@ npm start          # Run the compiled code
 npm run watch      # TypeScript will recompile on every file change
 ```
 
+**Test-driven development:**
+```bash
+npm run test:watch # Tests will re-run on every file change
+```
+
 ## 🛠️ Development
 
 ### Making Changes
 
 1. Edit files in the `src/` directory
 2. Run `npm run dev` to test your changes immediately
-3. Run `npm run build` to compile for production
+3. Run `npm test` to ensure all tests pass
+4. Run `npm run build` to compile for production
 
 ### Adding New Dependencies
 
@@ -186,6 +255,27 @@ npm install --save-dev <package-name>
 For TypeScript type definitions:
 ```bash
 npm install --save-dev @types/<package-name>
+```
+
+### Writing Tests
+
+When adding new functions:
+
+1. Create tests in the same directory with `.test.ts` extension
+2. Import the functions to test
+3. Use Jest's `describe` and `it` blocks to organize tests
+4. Follow the existing test patterns for consistency
+
+Example:
+```typescript
+import { myFunction } from './myModule';
+
+describe('myFunction', () => {
+  it('should do something specific', () => {
+    const result = myFunction(input);
+    expect(result).toBe(expected);
+  });
+});
 ```
 
 ### Code Quality
@@ -219,9 +309,11 @@ Contributions are welcome! To contribute:
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Ensure the code compiles without errors (`npm run build`)
-5. Commit your changes (`git commit -m 'Add some amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+5. Ensure all tests pass (`npm test`)
+6. Add tests for any new functionality
+7. Commit your changes (`git commit -m 'Add some amazing feature'`)
+8. Push to the branch (`git push origin feature/amazing-feature`)
+9. Open a Pull Request
 
 ## 📄 License
 
@@ -253,6 +345,13 @@ This project is licensed under the ISC License. See the `LICENSE` file for detai
 **Issue**: Changes not reflected when running
 - **Solution**: If using `npm start`, rebuild first. Alternatively, use `npm run dev` or `npm run watch` for automatic updates.
 
+**Issue**: Tests are failing
+- **Solution**: Make sure all dependencies are installed. Try:
+  ```bash
+  npm install
+  npm test
+  ```
+
 ---
 
 ## 📚 Additional Resources
@@ -260,6 +359,8 @@ This project is licensed under the ISC License. See the `LICENSE` file for detai
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 - [Node.js Documentation](https://nodejs.org/docs/)
 - [npm Documentation](https://docs.npmjs.com/)
+- [Jest Documentation](https://jestjs.io/docs/getting-started)
+- [ts-jest Documentation](https://kulshekhar.github.io/ts-jest/)
 
 ---
 
