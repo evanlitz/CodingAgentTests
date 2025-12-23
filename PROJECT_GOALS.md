@@ -94,3 +94,6 @@ Implemented comprehensive GitHub Actions workflows:
 - Status badge examples
 
 All workflows are production-ready and follow GitHub Actions best practices.
+
+### Phase 3: Cache Testing
+- [ ] Add a subtract function to src/index.ts with TypeScript types
