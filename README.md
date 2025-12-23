@@ -1,6 +1,6 @@
 # Test Project
 
-A simple Node.js TypeScript project built to demonstrate an autonomous agent's capabilities. This project showcases TypeScript configuration, build tools, and basic Node.js development patterns with comprehensive unit testing.
+A simple Node.js TypeScript project built to demonstrate an autonomous agent's capabilities. This project showcases TypeScript configuration, build tools, and basic Node.js development patterns with comprehensive unit testing and CI/CD automation.
 
 ## 📋 Table of Contents
 
@@ -10,6 +10,7 @@ A simple Node.js TypeScript project built to demonstrate an autonomous agent's c
 - [Installation](#installation)
 - [Usage](#usage)
 - [Testing](#testing)
+- [CI/CD](#cicd)
 - [Project Structure](#project-structure)
 - [Scripts](#scripts)
 - [Development](#development)
@@ -25,6 +26,7 @@ This project serves as a testing ground for autonomous agent development and inc
 - Modular function exports for reusability
 - Comprehensive build and development scripts
 - Unit testing with Jest
+- Automated CI/CD workflows with GitHub Actions
 
 ## ✨ Features
 
@@ -34,6 +36,10 @@ This project serves as a testing ground for autonomous agent development and inc
 - **Type Declarations**: Automatic .d.ts file generation for library usage
 - **Source Maps**: Full source map support for debugging
 - **Unit Testing**: Comprehensive test suite using Jest and ts-jest
+- **CI/CD Automation**: GitHub Actions workflows for continuous integration and deployment
+- **Code Quality**: ESLint integration with automated checks
+- **Security Scanning**: CodeQL analysis and dependency auditing
+- **Automated Updates**: Dependabot for keeping dependencies current
 
 ## 📦 Prerequisites
 
@@ -70,6 +76,7 @@ npm --version
    - jest (for testing)
    - ts-jest (TypeScript support for Jest)
    - @types/jest (Jest type definitions)
+   - ESLint and related plugins
 
 ## 💻 Usage
 
@@ -189,26 +196,100 @@ The test suite includes:
 
 For detailed testing documentation, see `TESTING.md`.
 
+## 🔄 CI/CD
+
+This project includes comprehensive GitHub Actions workflows for continuous integration and deployment.
+
+### Available Workflows
+
+1. **CI/CD Pipeline** (`ci.yml`)
+   - Runs on every push and pull request
+   - Tests across multiple OS (Ubuntu, Windows, macOS)
+   - Tests with multiple Node.js versions (18.x, 20.x)
+   - Automated linting, testing, and building
+   - Code coverage reporting with Codecov integration
+   - Security audits with npm audit
+
+2. **Release Workflow** (`release.yml`)
+   - Automated releases on version tags
+   - Changelog generation
+   - Build artifact archiving
+   - Optional npm publishing
+
+3. **CodeQL Security Scanning** (`codeql.yml`)
+   - Advanced code security analysis
+   - Weekly scheduled scans
+   - Vulnerability detection
+   - Code quality checks
+
+4. **Dependabot** (`dependabot.yml`)
+   - Automated dependency updates
+   - Weekly checks for outdated packages
+   - Grouped pull requests
+   - GitHub Actions version updates
+
+### Workflow Status
+
+<!-- Add status badges here -->
+```markdown
+![CI/CD](https://github.com/YOUR_USERNAME/test-project/workflows/CI%2FCD%20Pipeline/badge.svg)
+![CodeQL](https://github.com/YOUR_USERNAME/test-project/workflows/CodeQL%20Advanced%20Security/badge.svg)
+```
+
+### Using the Workflows
+
+**Running Checks Locally:**
+```bash
+# Run the full check suite (lint + test)
+npm run check
+
+# Run individual checks
+npm run lint:check
+npm test
+npm run build
+```
+
+**Creating a Release:**
+```bash
+# Create and push a version tag
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+For detailed CI/CD documentation, see `.github/workflows/README.md`.
+
 ## 📁 Project Structure
 
 ```
 test-project/
+├── .github/                  # GitHub configuration
+│   ├── workflows/           # GitHub Actions workflows
+│   │   ├── ci.yml          # Main CI/CD pipeline
+│   │   ├── release.yml     # Release automation
+│   │   ├── codeql.yml      # Security scanning
+│   │   └── README.md       # Workflow documentation
+│   ├── ISSUE_TEMPLATE/     # Issue templates
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── dependabot.yml      # Dependabot configuration
 ├── src/                      # Source files
-│   ├── index.ts             # Main application file with greet(), add(), and multiply()
-│   └── index.test.ts        # Unit tests for index.ts
-├── dist/                    # Compiled JavaScript output (generated)
-│   ├── index.js            # Compiled JavaScript
-│   ├── index.d.ts          # Type declarations
-│   └── index.js.map        # Source maps
+│   ├── index.ts             # Main application file
+│   └── index.test.ts        # Unit tests
+├── dist/                    # Compiled JavaScript (generated)
 ├── coverage/               # Test coverage reports (generated)
 ├── node_modules/           # Dependencies (generated)
 ├── package.json            # Project metadata and dependencies
 ├── package-lock.json       # Dependency lock file
 ├── tsconfig.json           # TypeScript configuration
 ├── jest.config.js          # Jest configuration
-├── PROJECT_GOALS.md        # Project objectives and success criteria
-├── TESTING.md              # Detailed testing documentation
-├── TSCONFIG_EXPLANATION.md # Detailed TypeScript config documentation
+├── eslint.config.js        # ESLint configuration
+├── .eslintrc.json          # ESLint rules
+├── .eslintignore           # ESLint ignore patterns
+├── .gitignore              # Git ignore patterns
+├── PROJECT_GOALS.md        # Project objectives
+├── TESTING.md              # Testing documentation
+├── TSCONFIG_EXPLANATION.md # TypeScript config details
 ├── TSCONFIG_SUMMARY.md     # TypeScript config summary
 └── README.md              # This file
 ```
@@ -227,6 +308,10 @@ The following npm scripts are available:
 | `test` | `npm test` | Run all unit tests with Jest |
 | `test:watch` | `npm run test:watch` | Run tests in watch mode (auto-rerun on changes) |
 | `test:coverage` | `npm run test:coverage` | Run tests with coverage report |
+| `lint` | `npm run lint` | Run ESLint on source files |
+| `lint:fix` | `npm run lint:fix` | Run ESLint and automatically fix issues |
+| `lint:check` | `npm run lint:check` | Run ESLint with zero warnings tolerance |
+| `check` | `npm run check` | Run both lint:check and test (CI validation) |
 
 ### Common Workflows
 
@@ -253,14 +338,20 @@ npm run watch      # TypeScript will recompile on every file change
 npm run test:watch # Tests will re-run on every file change
 ```
 
+**Pre-commit checks:**
+```bash
+npm run check      # Run linting and tests
+```
+
 ## 🛠️ Development
 
 ### Making Changes
 
 1. Edit files in the `src/` directory
 2. Run `npm run dev` to test your changes immediately
-3. Run `npm test` to ensure all tests pass
-4. Run `npm run build` to compile for production
+3. Run `npm run lint:fix` to fix linting issues
+4. Run `npm test` to ensure all tests pass
+5. Run `npm run build` to compile for production
 
 ### Adding New Dependencies
 
@@ -309,6 +400,11 @@ This project uses TypeScript's strict mode with comprehensive type checking:
 - Unused variables and parameters detection
 - All code paths must return values
 
+ESLint is configured to enforce code quality standards:
+- TypeScript-specific rules
+- Best practice enforcement
+- Automatic fixing for many issues
+
 ## ⚙️ TypeScript Configuration
 
 The project uses a comprehensive TypeScript configuration with:
@@ -332,10 +428,15 @@ Contributions are welcome! To contribute:
 3. Make your changes
 4. Ensure the code compiles without errors (`npm run build`)
 5. Ensure all tests pass (`npm test`)
-6. Add tests for any new functionality
-7. Commit your changes (`git commit -m 'Add some amazing feature'`)
-8. Push to the branch (`git push origin feature/amazing-feature`)
-9. Open a Pull Request
+6. Ensure linting passes (`npm run lint:check`)
+7. Add tests for any new functionality
+8. Commit your changes (`git commit -m 'Add some amazing feature'`)
+9. Push to the branch (`git push origin feature/amazing-feature`)
+10. Open a Pull Request
+
+Pull requests will automatically trigger CI/CD workflows that must pass before merging.
+
+For detailed contribution guidelines, see the Pull Request template.
 
 ## 📄 License
 
@@ -374,6 +475,15 @@ This project is licensed under the ISC License. See the `LICENSE` file for detai
   npm test
   ```
 
+**Issue**: ESLint errors
+- **Solution**: Try automatic fixing first:
+  ```bash
+  npm run lint:fix
+  ```
+
+**Issue**: CI/CD workflows not running
+- **Solution**: Ensure workflows are enabled in repository settings and check branch names match trigger patterns.
+
 ---
 
 ## 📚 Additional Resources
@@ -383,6 +493,8 @@ This project is licensed under the ISC License. See the `LICENSE` file for detai
 - [npm Documentation](https://docs.npmjs.com/)
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [ts-jest Documentation](https://kulshekhar.github.io/ts-jest/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [ESLint Documentation](https://eslint.org/docs/latest/)
 
 ---
 
