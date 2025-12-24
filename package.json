@@ -16,7 +16,8 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "lint:check": "eslint src/**/*.ts --max-warnings 0",
-    "check": "npm run lint:check && npm run test"
+    "check": "npm run lint:check && npm run test",
+    "check:buffer-globals": "bash scripts/check-buffer-globals-status.sh"
   },
   "keywords": [
     "typescript",
