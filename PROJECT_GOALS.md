@@ -216,7 +216,7 @@ node src/task.js list
 - [x] Implement `add` with --category flag
 - [x] Filter tasks by category
 - [x] Show category badges in list
-- [ ] Update tests
+- [x] Update tests
 
 **Expected files:**
 - Update `src/task.js` with category handling ✅
