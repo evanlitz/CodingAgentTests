@@ -132,7 +132,7 @@ node src/task.js delete 123
 - [x] Implement `add` with --priority flag
 - [x] Color-code priorities in list view
 - [x] Sort tasks by priority
-- [ ] Update tests for priorities
+- [x] Update tests for priorities
 
 **Expected files:**
 - Update `src/task.js` with priority handling ✅
