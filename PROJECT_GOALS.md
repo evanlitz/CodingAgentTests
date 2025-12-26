@@ -248,7 +248,7 @@ node src/task.js list --category work
 - [x] Implement `filter` command (by status, priority, category)
 - [x] Add case-insensitive search
 - [x] Support multiple filters
-- [ ] Add tests for search/filter
+- [x] Add tests for search/filter
 
 **Expected files:**
 - Create `src/commands/search.js`
