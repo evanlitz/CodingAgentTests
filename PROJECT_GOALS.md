@@ -16,7 +16,7 @@ Create a production-ready CLI tool that demonstrates the autonomous agent's abil
 ## Phase 1: Core Functionality
 
 ### Task 1: Project Setup & Basic Commands
-- [ ] Create src/task.js with CLI argument parsing
+- [x] Create src/task.js with CLI argument parsing
 - [ ] Create src/storage.js for JSON file operations
 - [ ] Implement `add` command (add new task)
 - [ ] Implement `list` command (show all tasks)
