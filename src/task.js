@@ -4,7 +4,7 @@ const { Command } = require('commander');
 const chalk = require('chalk');
 const path = require('path');
 const readline = require('readline');
-const { parseISO, isBefore, startOfDay } = require('date-fns');
+const { validateDate, formatDate, isTaskOverdue, getRelativeDate } = require('./utils/dateHelper');
 
 // Create the CLI program
 const program = new Command();
@@ -32,12 +32,28 @@ program
         process.exit(1);
       }
 
+      // Validate priority
+      const validPriorities = ['low', 'medium', 'high'];
+      if (options.priority && !validPriorities.includes(options.priority.toLowerCase())) {
+        console.error(chalk.red(`❌ Error: Invalid priority "${options.priority}". Use: low, medium, or high`));
+        process.exit(1);
+      }
+
+      // Validate due date if provided
+      if (options.due) {
+        const validation = validateDate(options.due);
+        if (!validation.isValid) {
+          console.error(chalk.red(`❌ Error: ${validation.error}`));
+          process.exit(1);
+        }
+      }
+
       // Create task object
       const task = {
         id: Date.now(),
         description: description.trim(),
         status: 'pending',
-        priority: options.priority || 'medium',
+        priority: options.priority ? options.priority.toLowerCase() : 'medium',
         createdAt: new Date().toISOString()
       };
 
@@ -58,7 +74,7 @@ program
         message += ` (Priority: ${options.priority.toUpperCase()})`;
       }
       if (options.due) {
-        message += ` (Due: ${options.due})`;
+        message += ` (Due: ${formatDate(options.due)})`;
       }
       if (options.category) {
         message += ` [${options.category}]`;
@@ -125,8 +141,11 @@ program
           line += ` ${priorityIcon}`;
         }
         if (task.dueDate) {
+          // Format the date for display
+          const formattedDate = formatDate(task.dueDate);
+          const dueDateText = `(Due: ${formattedDate})`;
+          
           // Show due date in red if overdue
-          const dueDateText = `(Due: ${task.dueDate})`;
           if (isOverdue && task.status !== 'completed') {
             line += ` ${chalk.red(dueDateText)}`;
           } else {
@@ -248,6 +267,18 @@ program
           line += task.description;
         }
         
+        // Add formatted due date if present
+        if (task.dueDate) {
+          const formattedDate = formatDate(task.dueDate);
+          const dueDateText = `(Due: ${formattedDate})`;
+          
+          if (isOverdue && task.status !== 'completed') {
+            line += ` ${chalk.red(dueDateText)}`;
+          } else {
+            line += ` ${chalk.gray(dueDateText)}`;
+          }
+        }
+        
         console.log(line);
       });
       console.log('');
@@ -343,26 +374,6 @@ function sortTasks(tasks, field) {
   }
   
   return sorted;
-}
-
-/**
- * Check if a task is overdue
- * @param {Object} task - The task to check
- * @returns {boolean} True if task is overdue, false otherwise
- */
-function isTaskOverdue(task) {
-  if (!task.dueDate || task.status === 'completed') {
-    return false;
-  }
-  
-  try {
-    const today = startOfDay(new Date());
-    const dueDate = startOfDay(parseISO(task.dueDate));
-    return isBefore(dueDate, today);
-  } catch (error) {
-    // If date parsing fails, treat as not overdue
-    return false;
-  }
 }
 
 /**

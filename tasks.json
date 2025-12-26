@@ -53,5 +53,29 @@
     "createdAt": "2025-12-26T21:58:19.691Z",
     "dueDate": "2023-06-15",
     "category": "urgent"
+  },
+  {
+    "id": 1766786539070,
+    "description": "Test task with valid date",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2025-12-26T22:02:19.070Z",
+    "dueDate": "2025-06-15"
+  },
+  {
+    "id": 1766786775850,
+    "description": "Demo task with date",
+    "status": "pending",
+    "priority": "medium",
+    "createdAt": "2025-12-26T22:06:15.850Z",
+    "dueDate": "2025-03-15"
+  },
+  {
+    "id": 1766787066435,
+    "description": "Demo task with date",
+    "status": "pending",
+    "priority": "medium",
+    "createdAt": "2025-12-26T22:11:06.435Z",
+    "dueDate": "2025-03-15"
   }
 ]
