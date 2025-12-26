@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1766779877119,
+    "description": "Buy groceries",
+    "status": "pending",
+    "priority": "medium",
+    "createdAt": "2025-12-26T20:11:17.119Z"
+  },
+  {
+    "id": 1766779916957,
+    "description": "Fix bug",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2025-12-26T20:11:56.957Z"
+  }
+]

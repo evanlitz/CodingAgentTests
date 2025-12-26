@@ -1,218 +1,329 @@
-# Discord Bot - Project Goals
+# Task Manager CLI - Project Goals
 
-Build a feature-rich Discord bot with commands, event handlers, and utility functions.
+Build a fully-featured command-line task manager with persistence, priorities, filtering, and comprehensive testing.
 
 ## Objective
 
-Create a production-ready Discord bot that demonstrates the autonomous agent's ability to:
-- Build modular, scalable code
-- Implement best practices
+Create a production-ready CLI tool that demonstrates the autonomous agent's ability to:
+- Build clean, modular architecture
+- Implement CRUD operations
+- Handle file I/O and data persistence
 - Write comprehensive tests
-- Create documentation
-- Learn patterns across similar tasks (memory system validation)
+- **Learn patterns across similar tasks** (memory system validation)
 
 ---
 
-## Phase 1: Core Setup & Basic Commands
+## Phase 1: Core Functionality
 
-### Task 1: Project Setup & Basic Bot
-- [x] Create src/index.js with Discord client setup
-- [ ] Create src/config.js for environment variables
-- [ ] Create .env.example with required tokens
-- [ ] Add basic ready event handler
-- [ ] Add connection error handling
+### Task 1: Project Setup & Basic Commands
+- [ ] Create src/task.js with CLI argument parsing
+- [ ] Create src/storage.js for JSON file operations
+- [ ] Implement `add` command (add new task)
+- [ ] Implement `list` command (show all tasks)
+- [ ] Create tasks.json storage file
+- [ ] Add basic error handling
 
-**Files to create:**
-- `src/index.js` - Main bot entry point
-- `src/config.js` - Configuration loader
-- `.env.example` - Environment variable template
+**Expected files:**
+- `src/task.js` - Main CLI entry point
+- `src/storage.js` - JSON read/write operations
+- `tasks.json` - Task storage (empty array initially)
 
-### Task 2: Command Handler System
-- [ ] Create src/commands/ directory structure
-- [ ] Create src/handlers/commandHandler.js
-- [ ] Implement dynamic command loading
-- [ ] Add command registration system
-- [ ] Add error handling for commands
+**Expected behavior:**
+```bash
+node src/task.js add "Buy groceries"
+# Output: ✅ Task added: #1 "Buy groceries"
 
-**Files to create:**
-- `src/handlers/commandHandler.js` - Command loader
-- `src/commands/ping.js` - Example ping command
+node src/task.js list
+# Output:
+# 📋 Your Tasks:
+#  [1] [ ] Buy groceries
+```
 
-### Task 3: Basic Utility Commands
-- [ ] Create !ping command (latency check)
-- [ ] Create !help command (list all commands)
-- [ ] Create !info command (bot information)
-- [ ] Add command descriptions and usage
-- [ ] Add tests for utility commands
-
-**Files to create:**
-- `src/commands/ping.js`
-- `src/commands/help.js`
-- `src/commands/info.js`
-- `tests/commands/utility.test.js`
+**Memory validation:**
+- First task, no predictions
+- Codebase map built
+- Pattern created: "CLI command"
 
 ---
 
-## Phase 2: Fun & Interactive Commands
+### Task 2: Complete & Delete Operations
+- [ ] Implement `done` command (mark task complete)
+- [ ] Implement `delete` command (remove task)
+- [ ] Update storage.js to handle modifications
+- [ ] Add task status tracking (pending/completed)
+- [ ] Add colored output (green for completed, white for pending)
 
-### Task 4: Fun Commands Module
-- [ ] Create !joke command (random jokes)
-- [ ] Create !quote command (inspirational quotes)
-- [ ] Create !8ball command (magic 8-ball)
-- [ ] Create !roll command (dice roller)
-- [ ] Add tests for fun commands
+**Expected files:**
+- Update `src/task.js` with new commands
+- Update `src/storage.js` with update/delete methods
 
-**Files to create:**
-- `src/commands/joke.js`
-- `src/commands/quote.js`
-- `src/commands/8ball.js`
-- `src/commands/roll.js`
-- `tests/commands/fun.test.js`
+**Expected behavior:**
+```bash
+node src/task.js done 1
+# Output: ✅ Task #1 marked as complete
 
-**Expected Memory Benefit:**
-- Pattern recognition: "command creation"
-- File suggestions: Similar structure to Task 3
-- Cost prediction: ~$0.03-0.05 per command
+node src/task.js delete 2
+# Output: 🗑️  Task #2 deleted
+```
 
-### Task 5: Data Utilities Module
-- [ ] Create src/utils/storage.js (JSON file storage)
-- [ ] Create !remindme command (set reminders)
-- [ ] Create !todo command (personal todo list)
-- [ ] Implement data persistence
-- [ ] Add tests for storage utility
-
-**Files to create:**
-- `src/utils/storage.js`
-- `src/commands/remindme.js`
-- `src/commands/todo.js`
-- `tests/utils/storage.test.js`
+**Memory validation:**
+- Pattern match with Task 1 (~30-50% confidence)
+- Suggests: `src/task.js`, `src/storage.js`
+- Cache hits on reading existing files
 
 ---
 
-## Phase 3: Advanced Features
+### Task 3: Data Persistence & Validation
+- [ ] Ensure tasks persist across runs
+- [ ] Add input validation (empty tasks, invalid IDs)
+- [ ] Add confirmation for delete operations
+- [ ] Handle edge cases (empty list, invalid commands)
+- [ ] Create tests for storage operations
 
-### Task 6: Moderation Commands
-- [ ] Create !kick command (kick users)
-- [ ] Create !ban command (ban users)
-- [ ] Create !warn command (warn users)
-- [ ] Add permission checks
-- [ ] Add moderation logs
+**Expected files:**
+- Update `src/storage.js` with validation
+- Create `tests/storage.test.js`
 
-**Files to create:**
-- `src/commands/moderation/kick.js`
-- `src/commands/moderation/ban.js`
-- `src/commands/moderation/warn.js`
-- `src/utils/permissions.js`
-- `tests/commands/moderation.test.js`
+**Expected behavior:**
+```bash
+node src/task.js add ""
+# Output: ❌ Error: Task description cannot be empty
 
-**Expected Memory Benefit:**
-- Pattern: "moderation commands" (distinct from fun commands)
-- Suggests: `src/utils/permissions.js` for all mod commands
-- Complexity: Medium-high (permission checks)
+node src/task.js delete 999
+# Output: ❌ Error: Task #999 not found
+```
 
-### Task 7: Event Handlers
-- [ ] Create src/events/ directory
-- [ ] Create messageCreate event handler
-- [ ] Create guildMemberAdd event (welcome message)
-- [ ] Create guildMemberRemove event
-- [ ] Add event registration system
-
-**Files to create:**
-- `src/events/messageCreate.js`
-- `src/events/guildMemberAdd.js`
-- `src/events/guildMemberRemove.js`
-- `src/handlers/eventHandler.js`
-
-### Task 8: API Integration Commands
-- [ ] Create !weather command (weather API)
-- [ ] Create !crypto command (cryptocurrency prices)
-- [ ] Create src/utils/api.js (API helper)
-- [ ] Add rate limiting
-- [ ] Add error handling for API failures
-
-**Files to create:**
-- `src/commands/weather.js`
-- `src/commands/crypto.js`
-- `src/utils/api.js`
-- `tests/utils/api.test.js`
+**Memory validation:**
+- Medium confidence prediction (~50-60%)
+- File suggestions appear
+- Cache hit rate: ~25-35%
 
 ---
 
-## Phase 4: Polish & Documentation
+## Phase 2: Enhanced Features
+
+### Task 4: Priority Levels
+- [ ] Add priority field to tasks (low/medium/high)
+- [ ] Implement `add` with --priority flag
+- [ ] Color-code priorities in list view
+- [ ] Sort tasks by priority
+- [ ] Update tests for priorities
+
+**Expected files:**
+- Update `src/task.js` with priority handling
+- Update `src/storage.js` schema
+- Create `tests/priority.test.js`
+
+**Expected behavior:**
+```bash
+node src/task.js add "Fix bug" --priority high
+# Output: ✅ Task added: #3 "Fix bug" (Priority: HIGH)
+
+node src/task.js list
+# Output:
+# 📋 Your Tasks:
+#  [3] [ ] Fix bug (🔴 HIGH)
+#  [1] [x] Buy groceries (🟢 LOW)
+```
+
+**Memory validation:**
+- Pattern: "add feature to CRUD command" (~70% confidence)
+- Suggests: `src/task.js`, `src/storage.js`, tests
+- Cache hit rate: ~40%
+
+---
+
+### Task 5: Due Dates & Sorting
+- [ ] Add due date field to tasks
+- [ ] Implement `add` with --due flag
+- [ ] Show overdue tasks in red
+- [ ] Implement `sort` command (by date, priority, status)
+- [ ] Add date formatting and validation
+
+**Expected files:**
+- Update `src/task.js` with date handling
+- Create `src/utils/dateHelper.js`
+- Update tests
+
+**Expected behavior:**
+```bash
+node src/task.js add "Submit report" --due 2024-12-31
+# Output: ✅ Task added: #4 "Submit report" (Due: Dec 31, 2024)
+
+node src/task.js list --sort due
+# Output: Tasks sorted by due date
+```
+
+**Memory validation:**
+- High confidence (~80%)
+- Suggests: `src/utils/` for new utility
+- Cache hit rate: ~45%
+
+---
+
+### Task 6: Categories & Tags
+- [ ] Add category/tags field to tasks
+- [ ] Implement `add` with --category flag
+- [ ] Filter tasks by category
+- [ ] Show category badges in list
+- [ ] Update tests
+
+**Expected files:**
+- Update `src/task.js` with category handling
+- Create `src/utils/formatter.js` for display
+- Update tests
+
+**Expected behavior:**
+```bash
+node src/task.js add "Review PR" --category work
+# Output: ✅ Task added: #5 "Review PR" [work]
+
+node src/task.js list --category work
+# Output: Shows only work-related tasks
+```
+
+**Memory validation:**
+- Very high confidence (~85-90%)
+- Accurate cost predictions
+- Cache hit rate: ~50%
+
+---
+
+## Phase 3: Advanced Operations
+
+### Task 7: Search & Filtering
+- [ ] Implement `search` command (text search)
+- [ ] Implement `filter` command (by status, priority, category)
+- [ ] Add case-insensitive search
+- [ ] Support multiple filters
+- [ ] Add tests for search/filter
+
+**Expected files:**
+- Create `src/commands/search.js`
+- Create `src/commands/filter.js`
+- Update `src/task.js` to use command modules
+
+**Expected behavior:**
+```bash
+node src/task.js search "report"
+# Output: Shows all tasks containing "report"
+
+node src/task.js filter --status pending --priority high
+# Output: Shows pending high-priority tasks
+```
+
+**Memory validation:**
+- Pattern: "command module" (new pattern)
+- High confidence on existing patterns
+- Cache hit rate: ~55%
+
+---
+
+### Task 8: Statistics & Reporting
+- [ ] Implement `stats` command (task statistics)
+- [ ] Show completion percentage
+- [ ] Show tasks by category
+- [ ] Show tasks by priority distribution
+- [ ] Create visual progress indicators
+
+**Expected files:**
+- Create `src/commands/stats.js`
+- Create `src/utils/calculator.js`
+- Update tests
+
+**Expected behavior:**
+```bash
+node src/task.js stats
+# Output:
+# 📊 Task Statistics:
+#    Total: 10 tasks
+#    Completed: 6 (60%)
+#    Pending: 4 (40%)
+#
+#    By Priority:
+#    🔴 High: 2
+#    🟡 Medium: 3
+#    🟢 Low: 5
+```
+
+**Memory validation:**
+- Multiple patterns recognized
+- Very high confidence (90%+)
+- Cache hit rate: ~60%
+
+---
+
+## Phase 4: Testing & Documentation
 
 ### Task 9: Comprehensive Testing
-- [ ] Add tests for all commands
+- [ ] Write tests for all commands
 - [ ] Add integration tests
-- [ ] Create test mocks for Discord.js
-- [ ] Add test coverage reporting
-- [ ] Fix any failing tests
+- [ ] Create test fixtures and mocks
+- [ ] Add edge case tests
+- [ ] Achieve >80% code coverage
 
-**Files to create:**
-- `tests/setup.js` - Test configuration
-- `tests/mocks/discord.js` - Discord.js mocks
-- Various test files for coverage
+**Expected files:**
+- `tests/commands/add.test.js`
+- `tests/commands/delete.test.js`
+- `tests/commands/search.test.js`
+- `tests/integration.test.js`
+- `tests/fixtures/sample-tasks.json`
 
-**Expected Memory Benefit:**
-- High cache hit rate (reading existing command files)
-- Pattern: "testing commands"
-- File suggestions: All command files for testing
+**Expected behavior:**
+```bash
+npm test
+# Output: All tests pass with >80% coverage
+```
 
-### Task 10: Documentation & README
-- [ ] Create comprehensive README.md
-- [ ] Document all commands with examples
-- [ ] Create CONTRIBUTING.md
+**Memory validation:**
+- Pattern: "testing" (distinct from command creation)
+- VERY high cache hit rate (~65-70%) - reads all source files
+- Suggests: ALL command and utility files
+
+---
+
+### Task 10: Documentation & Polish
+- [ ] Write comprehensive README.md
+- [ ] Add usage examples for all commands
+- [ ] Create CLI help text (--help flag)
 - [ ] Add JSDoc comments to all functions
-- [ ] Create deployment guide
+- [ ] Create CONTRIBUTING.md
 
-**Files to create:**
-- `README.md` - Project documentation
-- `CONTRIBUTING.md` - Contribution guidelines
-- `docs/COMMANDS.md` - Command reference
-- `docs/DEPLOYMENT.md` - Deployment guide
+**Expected files:**
+- Update `README.md` with full documentation
+- Create `docs/USAGE.md` with examples
+- Create `CONTRIBUTING.md`
+- Add inline documentation
 
----
+**Expected behavior:**
+```bash
+node src/task.js --help
+# Output: Shows all available commands and usage
+```
 
-## Memory System Validation Checkpoints
-
-Track these metrics as the agent completes tasks:
-
-**Phase 1 (File Cache):**
-- ✅ Cache hits when re-reading config files
-- ✅ Cache hits when reading command templates
-
-**Phase 2 (Codebase Map):**
-- ✅ Map shows all commands in src/commands/
-- ✅ No repeated list_directory calls
-- ✅ Instant map loading on Tasks 2+
-
-**Phase 3 (Task History):**
-- ✅ Task 1: No prediction (first task)
-- ✅ Task 2-3: Low confidence predictions (~30-50%)
-- ✅ Task 4-6: Medium confidence (~60-80%)
-- ✅ Task 7+: High confidence (80-100%)
-- ✅ File suggestions appear (e.g., "tasks like this modify src/commands/*.js")
-- ✅ Cost predictions accurate within ±20%
+**Memory validation:**
+- Pattern: "documentation"
+- Highest cache hit rate (~70-75%) - reads everything
+- Cost prediction very accurate (±5%)
 
 ---
 
-## Success Metrics
+## Success Criteria
 
-By the end of this project, the agent should have:
-- ✅ 10+ commands implemented
-- ✅ Modular, maintainable code structure
-- ✅ Comprehensive test coverage (>80%)
-- ✅ Full documentation
-- ✅ Learned 4-5 distinct task patterns
-- ✅ Demonstrated 60-70% API cost reduction
+✅ All 10 tasks completed
+✅ Working CLI with 10+ commands
+✅ Comprehensive test suite (>80% coverage)
+✅ Full documentation
+✅ 4-5 distinct patterns learned
+✅ Cache hit rate >60% on final tasks
+✅ Cost predictions accurate within ±15%
+✅ 65%+ overall cost reduction demonstrated
 
 ---
 
-## Notes
+## Ready to Build! 🚀
 
-- This project is designed to showcase memory system capabilities
-- Tasks progress from simple to complex
-- Similar tasks (commands) will trigger pattern recognition
-- Agent will learn optimal file structures and reuse them
-- By Task 5+, agent should predict costs accurately and suggest relevant files
-
-**Ready to start!** Run `npm run agent:once` to begin with Task 1.
+```bash
+cd agent
+npm run agent:once
+```
