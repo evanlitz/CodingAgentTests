@@ -279,7 +279,7 @@ node src/task.js filter --status pending --priority high
 - [x] Show tasks by category
 - [x] Show tasks by priority distribution
 - [x] Show overdue task count ✅ **NEW**
-- [ ] Create visual progress indicators
+- [x] Create visual progress indicators
 - [ ] Add tests
 
 **Expected files:**
