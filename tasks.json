@@ -14,13 +14,6 @@
     "createdAt": "2025-12-26T20:11:56.957Z"
   },
   {
-    "id": 1766780693304,
-    "description": "Test task from agent",
-    "status": "pending",
-    "priority": "medium",
-    "createdAt": "2025-12-26T20:24:53.304Z"
-  },
-  {
     "id": 1766780718318,
     "description": "Submit report",
     "status": "pending",

@@ -3,6 +3,7 @@
 const { Command } = require('commander');
 const chalk = require('chalk');
 const path = require('path');
+const readline = require('readline');
 
 // Create the CLI program
 const program = new Command();
@@ -156,7 +157,8 @@ program
 program
   .command('delete <id>')
   .description('Delete a task')
-  .action((id) => {
+  .option('-f, --force', 'Skip confirmation prompt')
+  .action(async (id, options) => {
     try {
       const storage = require('./storage');
       const taskId = parseInt(id);
@@ -166,8 +168,34 @@ program
         process.exit(1);
       }
 
-      storage.deleteTask(taskId);
-      console.log(chalk.green(`🗑️  Task #${taskId} deleted`));
+      // Get the task to show it in the confirmation
+      const tasks = storage.getTasks();
+      const task = tasks.find(t => t.id === taskId);
+      
+      if (!task) {
+        console.error(chalk.red(`❌ Error: Task #${taskId} not found`));
+        process.exit(1);
+      }
+
+      // If force flag is provided, skip confirmation
+      if (options.force) {
+        storage.deleteTask(taskId);
+        console.log(chalk.green(`🗑️  Task #${taskId} deleted`));
+        return;
+      }
+
+      // Show task details and ask for confirmation
+      console.log(chalk.yellow(`\nYou are about to delete:`));
+      console.log(chalk.white(`  [${task.id}] ${task.description}`));
+      
+      const confirmed = await confirmAction('Are you sure you want to delete this task? (y/n): ');
+      
+      if (confirmed) {
+        storage.deleteTask(taskId);
+        console.log(chalk.green(`🗑️  Task #${taskId} deleted`));
+      } else {
+        console.log(chalk.blue('Delete operation cancelled.'));
+      }
     } catch (error) {
       console.error(chalk.red(`❌ Error: ${error.message}`));
       process.exit(1);
@@ -285,6 +313,26 @@ function sortTasks(tasks, field) {
   }
   
   return sorted;
+}
+
+/**
+ * Prompt user for confirmation
+ * @param {string} question - The question to ask the user
+ * @returns {Promise<boolean>} True if user confirmed (y/yes), false otherwise
+ */
+function confirmAction(question) {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.question(chalk.yellow(question), (answer) => {
+      rl.close();
+      const normalized = answer.trim().toLowerCase();
+      resolve(normalized === 'y' || normalized === 'yes');
+    });
+  });
 }
 
 // Parse command line arguments
