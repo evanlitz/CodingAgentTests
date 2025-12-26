@@ -90,7 +90,7 @@ node src/task.js delete 2
 - [x] Add input validation (empty tasks, invalid IDs)
 - [x] Add confirmation for delete operations ✅ **NEW**
 - [x] Handle edge cases (empty list, invalid commands)
-- [ ] Create tests for storage operations
+- [x] Create tests for storage operations
 
 **Expected files:**
 - Update `src/storage.js` with validation ✅
