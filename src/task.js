@@ -4,6 +4,7 @@ const { Command } = require('commander');
 const chalk = require('chalk');
 const path = require('path');
 const readline = require('readline');
+const { parseISO, isBefore, startOfDay } = require('date-fns');
 
 // Create the CLI program
 const program = new Command();
@@ -109,14 +110,28 @@ program
       tasks.forEach(task => {
         const statusIcon = task.status === 'completed' ? chalk.green('[✓]') : chalk.white('[ ]');
         const priorityIcon = getPriorityIcon(task.priority);
+        const isOverdue = isTaskOverdue(task);
         
-        let line = ` ${statusIcon} [${task.id}] ${task.description}`;
+        let line = ` ${statusIcon} [${task.id}] `;
+        
+        // Show task description in red if overdue and not completed
+        if (isOverdue && task.status !== 'completed') {
+          line += chalk.red(task.description);
+        } else {
+          line += task.description;
+        }
         
         if (task.priority && task.priority !== 'medium') {
           line += ` ${priorityIcon}`;
         }
         if (task.dueDate) {
-          line += ` ${chalk.gray(`(Due: ${task.dueDate})`)}`;
+          // Show due date in red if overdue
+          const dueDateText = `(Due: ${task.dueDate})`;
+          if (isOverdue && task.status !== 'completed') {
+            line += ` ${chalk.red(dueDateText)}`;
+          } else {
+            line += ` ${chalk.gray(dueDateText)}`;
+          }
         }
         if (task.category) {
           line += ` ${chalk.cyan(`[${task.category}]`)}`;
@@ -222,7 +237,18 @@ program
       console.log(chalk.blue.bold(`\n🔍 Search results for "${query}":\n`));
       results.forEach(task => {
         const statusIcon = task.status === 'completed' ? chalk.green('[✓]') : chalk.white('[ ]');
-        console.log(` ${statusIcon} [${task.id}] ${task.description}`);
+        const isOverdue = isTaskOverdue(task);
+        
+        let line = ` ${statusIcon} [${task.id}] `;
+        
+        // Show task description in red if overdue and not completed
+        if (isOverdue && task.status !== 'completed') {
+          line += chalk.red(task.description);
+        } else {
+          line += task.description;
+        }
+        
+        console.log(line);
       });
       console.log('');
     } catch (error) {
@@ -247,6 +273,7 @@ program
 
       const completed = tasks.filter(t => t.status === 'completed').length;
       const pending = tasks.filter(t => t.status === 'pending').length;
+      const overdue = tasks.filter(t => isTaskOverdue(t) && t.status !== 'completed').length;
       const percentage = Math.round((completed / tasks.length) * 100);
 
       // Count by priority
@@ -261,6 +288,9 @@ program
       console.log(`   Total: ${tasks.length} tasks`);
       console.log(`   ${chalk.green(`Completed: ${completed} (${percentage}%)`)} `);
       console.log(`   ${chalk.yellow(`Pending: ${pending} (${100 - percentage}%)`)} `);
+      if (overdue > 0) {
+        console.log(`   ${chalk.red(`Overdue: ${overdue}`)}`);
+      }
       console.log('');
       console.log('   By Priority:');
       console.log(`   🔴 High: ${priorities.high}`);
@@ -313,6 +343,26 @@ function sortTasks(tasks, field) {
   }
   
   return sorted;
+}
+
+/**
+ * Check if a task is overdue
+ * @param {Object} task - The task to check
+ * @returns {boolean} True if task is overdue, false otherwise
+ */
+function isTaskOverdue(task) {
+  if (!task.dueDate || task.status === 'completed') {
+    return false;
+  }
+  
+  try {
+    const today = startOfDay(new Date());
+    const dueDate = startOfDay(parseISO(task.dueDate));
+    return isBefore(dueDate, today);
+  } catch (error) {
+    // If date parsing fails, treat as not overdue
+    return false;
+  }
 }
 
 /**

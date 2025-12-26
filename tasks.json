@@ -16,7 +16,7 @@
   {
     "id": 1766780718318,
     "description": "Submit report",
-    "status": "pending",
+    "status": "completed",
     "priority": "high",
     "createdAt": "2025-12-26T20:25:18.318Z",
     "dueDate": "2024-12-31",
@@ -28,5 +28,30 @@
     "status": "pending",
     "priority": "low",
     "createdAt": "2025-12-26T20:26:45.663Z"
+  },
+  {
+    "id": 1766785886683,
+    "description": "Overdue test task",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2025-12-26T21:51:26.683Z",
+    "dueDate": "2024-01-01"
+  },
+  {
+    "id": 1766786034838,
+    "description": "Future task",
+    "status": "pending",
+    "priority": "medium",
+    "createdAt": "2025-12-26T21:53:54.838Z",
+    "dueDate": "2025-12-31"
+  },
+  {
+    "id": 1766786299691,
+    "description": "Another overdue task",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2025-12-26T21:58:19.691Z",
+    "dueDate": "2023-06-15",
+    "category": "urgent"
   }
 ]
