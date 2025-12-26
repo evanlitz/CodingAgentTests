@@ -16,7 +16,7 @@ Create a production-ready Discord bot that demonstrates the autonomous agent's a
 ## Phase 1: Core Setup & Basic Commands
 
 ### Task 1: Project Setup & Basic Bot
-- [ ] Create src/index.js with Discord client setup
+- [x] Create src/index.js with Discord client setup
 - [ ] Create src/config.js for environment variables
 - [ ] Create .env.example with required tokens
 - [ ] Add basic ready event handler
